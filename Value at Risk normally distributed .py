@@ -7,8 +7,8 @@
 #getting data from yahoofinance for AAPL, CVX, KO, JNJ and PG
 #importing pandas for dataframe handling
 #including matplotlib for plots visualisation
-#including numpy for 
-#importing norm from scipystats
+#including numpy
+#importing norm from scipystats for VaR
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -30,6 +30,7 @@ ko = yf.Ticker(ticker_symbol_3)
 jnj = yf.Ticker(ticker_symbol_4)
 pg = yf.Ticker(ticker_symbol_5)
 
+#defining to only pull Close column from historical data
 historical_data_appl = appl.history(period="2y")
 historical_data_cvx = cvx.history(period="2y")
 historical_data_ko = ko.history(period="2y")
