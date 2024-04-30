@@ -43,6 +43,7 @@ daily_prices_ko = historical_data_ko[['Close']]
 daily_prices_jnj = historical_data_jnj[['Close']]
 daily_prices_pg = historical_data_pg[['Close']]
 
+#creating a combined dataframe of all data
 combined_prices = pd.concat([daily_prices_aapl, daily_prices_cvx, daily_prices_ko, daily_prices_jnj, daily_prices_pg], axis=1)
 
 # Convert the index to a string format (YYYY-MM-DD)
