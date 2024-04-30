@@ -5,6 +5,10 @@
 
 
 #getting data from yahoofinance for AAPL, CVX, KO, JNJ and PG
+#importing pandas for dataframe handling
+#including matplotlib for plots visualisation
+#including numpy for 
+#importing norm from scipystats
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
