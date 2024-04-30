@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 #getting data from yahoofinance for AAPL, CVX, KO, JNJ and PG
 #importing pandas for dataframe handling
 #including matplotlib for plots visualisation
@@ -54,18 +53,15 @@ combined_prices.columns = tickers
 # Display the transformed data frame
 print(combined_prices.head())
 
-
 #creating a plot for visualisation
 combined_prices.plot().set_ylabel("Closing prices in US$")
 plt.show()
-
 
 #Compute daily asset returns 
 daily_returns = combined_prices.pct_change()
 
 #creating a list for portfolio weights
 weights = [0.4, 0.2, 0.1, 0.15, 0.15]
-
 
 #defining portfolio returns as a product of weights and daily returns - dot
 portfolio_returns = daily_returns.dot(weights)
@@ -74,24 +70,20 @@ portfolio_returns = daily_returns.dot(weights)
 portfolio_returns.plot().set_ylabel("Daily returns in %")
 plt.show()
 
-
 #Generate the covariance matrix from the portfolio daily returns
 covariance = daily_returns.cov()
+
 #annulize the covariance using 252 days per year
 covariance_annulized = covariance * 252
 print(covariance_annulized)
 
-
 #let us compute the mean and the variance of the portfolio returns
 portfolio_mean = portfolio_returns.mean()
 portfolio_std = portfolio_returns.std()
-
-
 VaR_95 = norm.ppf(0.95, loc=portfolio_mean, scale=portfolio_std)
 print("VaR at 95% confidence level:", VaR_95)
 print("The mean of the portfolio:", portfolio_mean)
 print("The std dev of the portfolio:",portfolio_std)
-
 
 #lets do some plots
 plt.hist(norm.rvs(size=1000000, loc=portfolio_mean, scale=portfolio_std), bins=100)
