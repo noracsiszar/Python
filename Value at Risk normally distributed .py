@@ -23,6 +23,7 @@ ticker_symbol_3 = 'KO'
 ticker_symbol_4 = 'JNJ'
 ticker_symbol_5 = 'PG'
 
+#defining the historical period starting from today
 appl = yf.Ticker(ticker_symbol_1)
 cvx = yf.Ticker(ticker_symbol_2)
 ko = yf.Ticker(ticker_symbol_3)
