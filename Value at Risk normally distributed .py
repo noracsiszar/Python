@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[32]:
-
-
 #getting data from yahoofinance for AAPL, CVX, KO, JNJ and PG
 #importing pandas for dataframe handling
 #including matplotlib for plots visualisation
@@ -14,7 +11,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
-
 
 #defining tickers for pulling data
 ticker_symbol_1 = 'AAPL'
@@ -37,6 +33,7 @@ historical_data_ko = ko.history(period="2y")
 historical_data_jnj = jnj.history(period="2y")
 historical_data_pg = pg.history(period="2y")
 
+#deciding only use Close from historical data
 daily_prices_aapl = historical_data_appl[['Close']]
 daily_prices_cvx = historical_data_cvx[['Close']]
 daily_prices_ko = historical_data_ko[['Close']]
@@ -63,9 +60,6 @@ combined_prices.plot().set_ylabel("Closing prices in US$")
 plt.show()
 
 
-# In[23]:
-
-
 #Compute daily asset returns 
 daily_returns = combined_prices.pct_change()
 
@@ -81,9 +75,6 @@ portfolio_returns.plot().set_ylabel("Daily returns in %")
 plt.show()
 
 
-# In[24]:
-
-
 #Generate the covariance matrix from the portfolio daily returns
 covariance = daily_returns.cov()
 #annulize the covariance using 252 days per year
@@ -91,49 +82,9 @@ covariance_annulized = covariance * 252
 print(covariance_annulized)
 
 
-# In[27]:
-
-
-##this is all nonsense for VaR and not really needed lol
-
-#Converting daily returns into quarterly and weekly minimum returns
-
-daily_returns.index = pd.to_datetime(daily_returns.index)
-returns_q = daily_returns.resample('Q').mean()
-print(returns_q.head(5))
-returns_w = daily_returns.resample('W').min()
-print(returns_w.head(5))
-
-
-# In[34]:
-
-
-#lets start with VaR when losses are normally distributed
-#creating a VaR measure at 95% confidence level
-VaR_95 = norm.ppf(0.95)
-#create a vAR mesure at the 5% significance level using numpy.quantile()
-draws = norm.rvs(size = 1000000)
-VaR_99 = np.quantile(draws, 0.99)
-
-#compare the 95% VaR and 99% VaR
-print ("95% VaR: ", VaR_95, "; 99% VaR: ", VaR_99)
-
-#plot the normal distribution histogram and 95% VaR measure
-plt.hist(draws, bins = 100)
-plt.axvline(x = VaR_95, c='r', label = "VaR at 95% confidence level")
-plt.legend();
-plt.show()
-
-
-# In[42]:
-
-
 #let us compute the mean and the variance of the portfolio returns
 portfolio_mean = portfolio_returns.mean()
 portfolio_std = portfolio_returns.std()
-
-
-# In[52]:
 
 
 VaR_95 = norm.ppf(0.95, loc=portfolio_mean, scale=portfolio_std)
@@ -148,28 +99,6 @@ plt.axvline (x = VaR_95, c= 'r', label = "VaR 95% confidence level")
 plt.legend();
 plt.show()
 
-
-# In[50]:
-
-
-#what if losses are not normally distrubted
-#lets try T-distribution
-from scipy.stats import t
-#creating rolling window parameter lists
-mu = portfolio_returns.rolling(30).mean()
-sigma = portfolio_returns.rolling(30).std()
-rolling_parameters = [(29, mu[i], s) for i, s in enumerate(sigma)]
-
-#compute the 99% VaR array using a rolling window parameter
-VaR_99 = np.array( [ t.ppf(0.99, *params)
-                   for params in rolling_parameters])
-#plot the min. risk exposure
-plt.plot(portfolio_returns.index, 0.01*VaR_99 *1000000)
-plt.show()
-print("VaR at 99% confidence level:", VaR_99)
-
-
-# In[ ]:
 
 
 
