@@ -16,7 +16,7 @@ import numpy as np
 from scipy.stats import norm
 
 
-
+#defining tickers for pulling data
 ticker_symbol_1 = 'AAPL'
 ticker_symbol_2 = 'CVX'
 ticker_symbol_3 = 'KO'
