@@ -7,3 +7,7 @@ Crea†ing weights pro ticker for the portfolio and calculating VaR, considering
 
 Project number 2:
 pulling data from yahoofinance and calculating technical analysis indicators with talib library.
+
+Project number 3:
+pulling data from yahoofinance on AAPL, calculating mean, variance, kurtosis, skewness and 
+testing if returns are normally distributed or not.
