@@ -11,3 +11,7 @@ Python projects
 # Project number 3:
 - pulling data from yahoofinance on AAPL, calculating mean, variance, kurtosis, skewness and 
 - testing if returns are normally distributed or not.
+
+# Project number 4:
+- displaying Austrian Govies data for 1year term maturity bonds
+- analyzing HYPO bonds for Duration, Convexity, DV01 and YTM
