@@ -20,3 +20,11 @@ Python projects
 - Contructing a BT Cerebro Engine for AAPL data from yahoo
 - using one signal
 - printing out total trades, graph, sharpe and analysis
+
+# Project number 6:
+- Educational spot market simulation
+- The user enters his/her name, gets FX gaps from the operating bank and FX quotes
+- The user can decide to buy or sell USD in order to close the FX gaps
+- The user inputs gets corrected in a loop for the previous decision (educational).
+- The market prices of the eod rates arrive.
+- The hedge position gets evaluated in terms of PnL.
